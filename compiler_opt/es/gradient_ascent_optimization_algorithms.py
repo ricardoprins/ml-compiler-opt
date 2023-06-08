@@ -32,7 +32,7 @@ import numpy as np
 
 
 # TODO(kchoro): Borrow JAXs optimizer library here. Integrated into Blackbox-v2.
-class GAOptimizer(metaclass=abc.ABCMeta):
+class GradientAscentOptimizer(metaclass=abc.ABCMeta):
   """Abstract class for general gradient ascent optimizers.
 
   Class is responsible for encoding different gradient ascent optimization
@@ -82,7 +82,7 @@ class GAOptimizer(metaclass=abc.ABCMeta):
     raise NotImplementedError("Abstract method")
 
 
-class MomentumOptimizer(GAOptimizer):
+class MomentumOptimizer(GradientAscentOptimizer):
   """Class implementing momentum gradient ascent optimizer.
 
   Setting momentum coefficient to zero is equivalent to vanilla gradient
@@ -122,7 +122,7 @@ class MomentumOptimizer(GAOptimizer):
     self.moving_average = np.asarray(state, dtype=np.float32)
 
 
-class AdamOptimizer(GAOptimizer):
+class AdamOptimizer(GradientAscentOptimizer):
   """Class implementing ADAM gradient ascent optimizer.
   
   The state is the first moment moving average, the second moment moving average, 
